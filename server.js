@@ -65,6 +65,8 @@ function weatherHandler(req,res) {
 // Route
 // app.get('/', renderHome);
 app.get('/show', places);
+app.get('/weather', weatherHandler);
+app.get('/zomato', zomato);
 app.post('/favorites', favorites);
 app.get('/aboutus', aboutUs);
 // app.get('*', handleError);
@@ -97,6 +99,10 @@ function places(request, response) {
     });
     response.render('pages/show', { 'places': newPlaces});
   });
+}
+
+function zomato (request, response) {
+  const lat
 }
 
 function favorites (request, response) {
