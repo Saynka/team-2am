@@ -7,7 +7,7 @@ const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
 const cors = require('cors');
-const { json, response, request } = require('express');
+const { response } = require('express');
 const methodOverride = require('method-override');
 
 require('dotenv').config();
