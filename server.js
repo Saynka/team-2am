@@ -22,9 +22,13 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 // Route
 // app.get('/', renderHome);
+app.get('/show', places);
+app.post('/favorites', favorites);
+app.get('/aboutus', aboutUs);
 // app.get('*', handleError);
 
 //ROUTE Handlers
+
 // function renderHome(req, res) {
 //   console.log('render home');
 //   const sql = 'SELECT * FROM booktable;';
@@ -39,11 +43,44 @@ const client = new pg.Client(process.env.DATABASE_URL);
 //     });
 // }
 
+function places(request, response) {
+  const search = request.query.search;
+  const lat = request.query.lat;
+  const lon = request.query.lon;
+  const url = `https://places.ls.hereapi.com/places/v1/autosuggest?at=${lat},${lon}&q=${search}&apiKey=${process.env.PLACES_API_KEY}`;
+  superagent.get(url).then(data => {
+    const places = data.results;
+    const newPlaces = places.forEach(obj => {
+      const place = new Place(obj);
+    });
+    response.render('pages/show', { 'places': newPlaces});
+  });
+}
+
+function favorites (request, response) {
+  const sql = 'SELECT * FROM table;';
+  client.query(sql).then(data => {
+    const rows = data.rows;
+    response.render('pages/favorites', { 'rows': rows});
+  });
+}
+
+function aboutUs (request, response) {
+  response.render('pages/about-us');
+}
+
 // function handleError(req, res) {
 //   res.status(404).render('pages/error');
 // }
 
+// Constructor
 
+
+function Place (obj) {
+  this.title = obj.title,
+  this.vicinity = obj.vicinity,
+  this.category = obj.categoryTitle
+}
 
 client.connect()
   .then(() => {
