@@ -42,23 +42,46 @@ client.connect()
     console.log(error);
   });
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
   res.status(200).render('pages/new');
 });
 
-app.get('/weather', weatherHandler);
 
-
-function weatherHandler(req,res) {
-  const search = req.body.search;
-  const key = process.env.WEATHERKEY;
+function weatherHandler(req, res) {
+  const search = req.query.search;
+  const key = process.env.WEATHER_KEY;
   console.log(search);
-  const url = `api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}`;
+  const url = `api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}&units=imperial`;
 
   superagent.get(url)
-    .then( data => {
-      console.log(data.body);
+    .then(data => {
+      let inst = new Weather(data);
+      // console.log(data.body);
+      res.status(200).render('pages/index', { info: inst });
+      console.log(inst);
     });
+}
+
+function addWeather(req, res) {
+  const sql = 'INSERT INTO places (name, description, temp, sunrise, sunset, windspeed) VALUES ($1, $2, $3, $4, $5, $6);';
+  const params = [req.body.name, req.body.description, req.body.temp, req.body.sunrise, req.body.sunset, req.body.windspeed];
+
+  client.query(sql, params)
+    .then(results => {
+      res.status(200).redirect('/favorites');
+    });
+}
+
+function deleteHandler(request, response) {
+  const SQL = 'DELETE FROM places WHERE id = $1;';
+  const params = [request.params.id];
+  client.query(SQL, params)
+    .then(response.status(200).redirect('/'))
+    .catch(error => errorHandler(request, response, error));
+}
+
+function errorHandler(error, response) {
+  response.status(500).render('pages/error', { error: error });
 }
 
 
@@ -66,8 +89,13 @@ function weatherHandler(req,res) {
 // app.get('/', renderHome);
 app.get('/show', places);
 app.get('/weather', weatherHandler);
-app.get('/zomato', zomato);
-app.post('/favorites', favorites);
+// app.post('/weather', (req,res) => {
+//   res.status(200).render('pages/index');
+// });
+app.delete('/delete/:id', deleteHandler);
+app.post('/add', addWeather);
+// app.get('/zomato', zomato);
+app.get('/favorites', favorites);
 app.get('/aboutus', aboutUs);
 // app.get('*', handleError);
 
@@ -97,23 +125,24 @@ function places(request, response) {
     const newPlaces = places.forEach(obj => {
       const place = new Place(obj);
     });
-    response.render('pages/show', { 'places': newPlaces});
+    response.render('pages/show', { 'places': newPlaces });
   });
 }
 
-function zomato (request, response) {
-  const lat
+// function zomato (request, response) {
+//   const lat
+// }
+
+function favorites(request, response) {
+  const sql = 'SELECT * FROM places;';
+  client.query(sql)
+    .then(data => {
+      let rows = data.rows;
+      response.render('pages/favorites', { row: rows });
+    });
 }
 
-function favorites (request, response) {
-  const sql = 'SELECT * FROM table;';
-  client.query(sql).then(data => {
-    const rows = data.rows;
-    response.render('pages/favorites', { 'rows': rows});
-  });
-}
-
-function aboutUs (request, response) {
+function aboutUs(request, response) {
   response.render('pages/about-us');
 }
 
@@ -124,9 +153,18 @@ function aboutUs (request, response) {
 // Constructor
 
 
-function Place (obj) {
-  this.title = obj.title,
-  this.vicinity = obj.vicinity,
-  this.category = obj.categoryTitle
+function Place(obj) {
+  this.title = obj.title;
+  this.vicinity = obj.vicinity;
+  this.category = obj.categoryTitle;
+}
+
+function Weather(obj) {
+  this.name = obj.body.name;
+  this.description = obj.body.weather[0].description;
+  this.temp = obj.body.main.temp;
+  this.sunrise = new Date(obj.body.sys.sunrise * 1000).toString().slice(15, 25);
+  this.sunset = new Date(obj.body.sys.sunset * 1000).toString().slice(15, 25);
+  this.windspeed = obj.body.wind.speed;
 }
 
