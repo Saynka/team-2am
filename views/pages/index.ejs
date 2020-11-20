@@ -28,26 +28,20 @@
         <button type="submit">Add to Favorites</button>
       </form>
 
-    </section>
+      <form action="/places" method="POST">
+        <input type="hidden" name="name" value="<%= info.name %>">
+        <input type="hidden" name="lat" value="<%= info.lat %>">
+        <input type="hidden" name="lon" value="<%= info.lon %>">
+        <button>Places to Visit</button>
+      </form>
 
-    <% place.forEach(thing => { %>
-    <section>
-      <h2> <%= thing.title %> </h2>
-      <p> <%= thing.vacinity %> </p>
-      <p> <%= thing.catagory %> </p>
-
-
-      <form action="/add" method="POST">
-        <input type="hidden" name="name" value="<%= thing.title %>">
-        <input type="hidden" name="temp" value="<%= thing.vacinity %>">
-        <input type="hidden" name="description" value="<%= thing.catagory  %>">
-
-        <button type="submit">Add to Favorites</button>
+      <form action="/zomato" method="POST">
+        <input type="hidden" name="lat" value="<%= info.lat %>">
+        <input type="hidden" name="lon" value="<%= info.lon %>">
+        <button>Restaurants to Try</button>
       </form>
 
     </section>
-    <% }) %>
-
 
   </main>
   <footer>
