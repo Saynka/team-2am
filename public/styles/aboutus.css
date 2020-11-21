@@ -1,3 +1,38 @@
+body{
+  background-color: rgb(20, 20, 20);
+  margin: auto;
+}
+
+
+#topbuttons{
+  margin-top: 5px;
+  margin-bottom: 22px;
+  /* display: flex; */
+  justify-content: center;
+  /* align-items: center; */
+  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+  font-stretch: expanded;
+  
+}
+
+#h{
+  float: left;
+}
+
+#n{
+  margin-left: 16px;
+  float: left;
+}
+
+#f{
+  margin-left: 16px;
+  float: left;
+}
+
+#au{
+  float: right;
+}
+
 #backimg {
   position: fixed;
   width: 100%;
@@ -12,17 +47,11 @@
   
   /* # p=ids to be determined */
   
-  h1 {
-    padding: 2em;
-    font-size: 2.8em;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: rgb(6, 12, 10);
-  }
-  
+ 
   #Sam {
     display: flex;
     flex-direction: row;
-    margin-right: 6em;
+    margin-right: 2em;
     height: 25em;
   }
   
@@ -30,7 +59,7 @@
     overflow: scroll;
     box-sizing: content-box;
     margin: 50px;
-    margin-left: 18em;
+    color: rgb(114, 171, 175);
   }
   
   #Sams {
@@ -56,6 +85,7 @@
     box-sizing: content-box;
     margin: 50px;
     margin-left: 6em;
+    color: rgb(114, 171, 175);
   }
   
   #lou {
@@ -81,7 +111,7 @@
     overflow: scroll;
     box-sizing: content-box;
     margin: 50px;
-    margin-right: 18em;
+    color: rgb(114, 171, 175);
   }
   
   

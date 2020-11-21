@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <%- include('../pages/layout/head.ejs') %>
+  <title>Saturday Night Lights</title>
 </head>
+
 <body>
-  <section>
-    <form action='/weather' method="GET">
-      <fieldset>
-        <legend>Search by City</legend>
-        <label>Enter a City:<input type='text' name='search'></label>
-        <button>Submit</button>
-  
-      </fieldset>
-    </form>
-  </section>
-  
+  <header>
+    <%- include('../pages/layout/header.ejs') %>
+  </header>
+  <div id="flexs">
+    <div id="site">
+    <p>HEDONIST ROOTS
+      Until recently, the prevailing view assumed lorem ipsum was born as a nonsense text. “It's not Latin, though it
+      looks like it, and it actually says nothing,” Before & After magazine answered a curious reader, “Its ‘words’
+      loosely approximate the frequency with which letters occur in English, which is why at a glance it looks pretty
+      real.”
+
+      As Cicero would put it, “Um, not so fast.”
+
+      The placeholder text, beginning with the line “Lorem ipsum dolor sit amet, consectetur adipiscing elit”, looks
+      like Latin because in its youth, centuries ago, it was Latin.
+
+      Richard McClintock, a Latin scholar from Hampden-Sydney College, is credited with discovering the source behind
+      the ubiquitous filler text. In seeing a sample of lorem ipsum, his interest was piqued by consectetur—a genuine,
+      albeit rare, Latin word. Consulting a Latin dictionary led McClintock to a passage from De Finibus Bonorum et
+      Malorum (“On the Extremes of Good and Evil”), a first-century B.C. text from the Roman philosopher Cicero.</p>
+    </div>
+    <img id="backimg" src="../styles/img/citybg.jpeg"></img>
+    <div class="topbox">
+      <section class="a-n">
+        <form action='/show' method="POST">
+          <fieldset>
+            <legend>Search by City</legend>
+            <label>Enter a City:<input id="b-n" type='text' name='search'></label>
+            <button id="c-n">Submit</button>
+
+          </fieldset>
+        </form>
+      </section>
+    </div>
+    <div class="botbox">
+      <p>aslkjfsd;jfa;sldjdslkfjas;ldjsad;ljf;saldjas;ldfas;ldkja;sdlj</p>
+    </div>
+  </div>
+  <footer>
+    <%- include('../pages/layout/footer.ejs') %>
+  </footer>
 </body>
+
 </html>
