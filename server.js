@@ -106,10 +106,8 @@ app.post('/add', addWeather);
 app.get('/', (req, res) => {
   res.status(200).render('pages/new');
 });
-app.get('/places/', places);
+app.get('/places', places);
 app.get('/zomato', zomato);
-app.post('/weather', weatherHandler);
-
 app.get('/favorites', favorites);
 app.get('/aboutus', aboutUs);
 // app.get('*', handleError);
@@ -117,18 +115,18 @@ app.get('/aboutus', aboutUs);
 //ROUTE Handlers
 
 // function renderHome(req, res) {
-  //   console.log('render home');
-  //   const sql = 'SELECT * FROM booktable;';
-  //   return client.query(sql)
-  //     .then(results => {
-  //       console.log(results.rows);
-  //       res.status(200).render('pages/index');
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       res.render('pages/error');
-  //     });
-  // }
+//   console.log('render home');
+//   const sql = 'SELECT * FROM booktable;';
+//   return client.query(sql)
+//     .then(results => {
+//       console.log(results.rows);
+//       res.status(200).render('pages/index');
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//       res.render('pages/error');
+//     });
+// }
 // }
 
 
@@ -179,16 +177,20 @@ function favorites(request, response) {
     .then(data => {
       let rows = data.rows;
       response.render('pages/favorites', { row: rows });
+    })
+    .catch(error => {
+      console.log(error);
     });
 }
 
 function aboutUs(request, response) {
   response.render('pages/about-us');
+}
 
 function zomatoHandler(forecast) {
   const lat = forecast.lat;
   const lon = forecast.lon;
-  const parameter = {'lat': lat, 'lon': lon, 'count': 5};
+  const parameter = { 'lat': lat, 'lon': lon, 'count': 5 };
   let newRest;
   zomatoKey.getCollections(parameter).then(data => {
     const restaurants = data.collections;
@@ -217,9 +219,9 @@ function aboutUs(request, response) {
 
 
 function Place(obj) {
-    this.title = obj.title || 'No title presented',
-    this.vicinity = obj.vicinity || 'No location presented',
-    this.category = obj.categoryTitle || 'No category presented'
+  this.title = obj.title || 'No title presented';
+  this.vicinity = obj.vicinity || 'No location presented';
+  this.category = obj.categoryTitle || 'No category presented';
 }
 
 
@@ -230,20 +232,20 @@ function Weather(obj) {
   this.sunrise = new Date(obj.body.sys.sunrise * 1000).toString().slice(15, 25);
   this.sunset = new Date(obj.body.sys.sunset * 1000).toString().slice(15, 25);
   this.windspeed = obj.body.wind.speed;
+}
 
 function Restaurant(obj) {
-  this.name = obj.title,
-  this.description = obj.description,
-  this.image = obj.image_url
+  this.name = obj.title;
+  this.description = obj.description;
+  this.image = obj.image_url;
 
 }
 
 // client.connect()
 //   .then(() => {
 
-});
+// });
 //   })
 //   .catch(error => {
 //     console.log(error);
 //   });
-
