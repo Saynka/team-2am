@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Weather Details</h2>
+
+  <section>
+    <h2> <%= row.name %> </h2>
+    <p> <%= row.temp %> DEGREES</p>
+    <p> <%= row.description %> </p>
+    <p> <%= row.sunrise %> AM</p>
+    <p> <%= row.sunset %> PM </p>
+    <p> <%= row.windspeed %> MPH</p>
+
+    <form action="/delete/<%=row.id%>?_method=DELETE" method="post" id="deleteForm">
+      <button type="submit">Delete Book</button>
+    </form>
+
+  </section>
+</body>
+</html>
