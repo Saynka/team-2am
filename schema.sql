@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS places;
 CREATE TABLE places (
   id SERIAL PRIMARY KEY,
-  location VARCHAR(255),
+  name VARCHAR(255),
   description TEXT,
-  author VARCHAR(255),
-  image VARCHAR(255),
-  isbn VARCHAR(255)
+  temp VARCHAR(255),
+  sunrise VARCHAR(255),
+  sunset VARCHAR(255),
+  windspeed VARCHAR(255)
 );

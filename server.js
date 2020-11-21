@@ -2,6 +2,7 @@
 
 //Bring in dependencies
 const express = require('express');
+const zomato = require('zomato-api');
 const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
@@ -23,13 +24,131 @@ app.use(methodOverride('_method'));
 // Declare port for server
 const PORT = process.env.PORT || 3000;
 
-
 // Creating postgres client
 const client = new pg.Client(process.env.DATABASE_URL);
 
-// app.get('/', (req,res) => {
-//   res.status(200).send('Shits GOOD');
-// });
+// Preparing zomato api key
+const zomatoKey = zomato({
+  userKey: '30d4a494d4c1cfa083e70daa7b4eb103'
+});
+
+// Routes
+
+app.get('/', (request, response) => {
+  response.status(200).render('pages/new');
+});
+app.get('/weather', weatherHandler);
+app.post('/add', addWeather);
+app.post('/places', placesHandler);
+app.post('/zomato', zomatoHandler);
+app.get('/favorites', favorites);
+app.get('/aboutus', aboutUs);
+app.delete('/delete/:id', deleteHandler);
+app.get('*', errorHandler);
+
+// Route handlers
+
+function weatherHandler(request, response) {
+  const search = request.query.search;
+  const key = process.env.WEATHER_KEY;
+  const url = `api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}&units=imperial`;
+  superagent.get(url)
+    .then(data => {
+      let inst = new Weather(data);
+      response.status(200).render('pages/index', { info: inst });
+    });
+}
+
+function addWeather(request, response) {
+  const sql = 'INSERT INTO places (name, description, temp, sunrise, sunset, windspeed) VALUES ($1, $2, $3, $4, $5, $6);';
+  const params = [request.body.name, request.body.description, request.body.temp, request.body.sunrise, request.body.sunset, request.body.windspeed];
+  client.query(sql, params)
+    .then(results => {
+      response.status(200).redirect('/favorites');
+    });
+}
+
+function placesHandler(request, response) {
+  const search = request.body.name;
+  const lat = request.body.lat;
+  const lon = request.body.lon;
+  let key = process.env.PLACES_API_KEY;
+  const url = `https://places.ls.hereapi.com/places/v1/autosuggest?at=${lat},${lon}&q=${search}&apiKey=${key}`;
+  superagent.get(url).then(data => {
+    const places = data.body.results;
+    let newPlaces = places.map(obj => new Place(obj));
+    console.log(1, places, 2, newPlaces);
+    response.status(200).render('pages/places', { place: newPlaces, search: search });
+  }).catch(error => {
+    console.log(error);
+  });
+}
+
+function zomatoHandler(request, response) {
+  const lat = request.body.lat;
+  const lon = request.body.lon;
+  const parameter = { 'lat': lat, 'lon': lon, 'count': 5 };
+  console.log('zomato', request.body);
+  zomatoKey.getCollections(parameter).then(data => {
+    const restaurants = data.collections;
+    let newRest = restaurants.map(obj => new Zomato(obj));
+    console.log(2, newRest);
+    response.render('pages/zomato', { zomato: newRest, search: request.body.name });
+  }).catch(error => {
+    console.log(error);
+  });
+}
+
+function favorites(request, response) {
+  const sql = 'SELECT * FROM places;';
+  client.query(sql).then(data => {
+    let rows = data.rows;
+    response.render('pages/favorites', { row: rows });
+  }).catch(error => {
+    console.log(error);
+  });
+}
+
+function aboutUs(request, response) {
+  response.render('pages/aboutus');
+}
+
+function deleteHandler(request, response) {
+  const SQL = 'DELETE FROM places WHERE id = $1;';
+  const params = [request.params.id];
+  client.query(SQL, params)
+    .then(response.status(200).redirect('/favorites'))
+    .catch(error => errorHandler(request, response, error));
+}
+
+function errorHandler(error, response) {
+  response.status(500).render('pages/error', { error: error });
+}
+
+// Constructors
+
+function Weather(obj) {
+  this.lon = obj.body.coord.lon;
+  this.lat = obj.body.coord.lat;
+  this.name = obj.body.name;
+  this.description = obj.body.weather[0].description;
+  this.temp = obj.body.main.temp;
+  this.sunrise = new Date(obj.body.sys.sunrise * 1000).toString().slice(15, 25);
+  this.sunset = new Date(obj.body.sys.sunset * 1000).toString().slice(15, 25);
+  this.windspeed = obj.body.wind.speed;
+}
+
+function Place(obj) {
+  this.title = obj.title || 'No title presented';
+  this.vicinity = obj.vicinity || 'No location presented';
+  this.category = obj.categoryTitle || 'No category presented';
+}
+
+function Zomato(obj) {
+  this.name = obj.collection.title;
+  this.description = obj.collection.description;
+  this.url = obj.collection.url;
+}
 
 client.connect()
   .then(() => {
@@ -40,97 +159,3 @@ client.connect()
   .catch(error => {
     console.log(error);
   });
-
-app.get('/', (req,res) => {
-  res.status(200).render('pages/new');
-});
-
-app.get('/weather', weatherHandler);
-
-
-function weatherHandler(req,res) {
-  const search = req.body.search;
-  const key = process.env.WEATHERKEY;
-  console.log(search);
-  const url = `api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}`;
-
-  superagent.get(url)
-    .then( data => {
-      console.log(data.body);
-    });
-}
-
-
-// Route
-// app.get('/', renderHome);
-app.get('/show', places);
-app.post('/favorites', favorites);
-app.get('/aboutus', aboutUs);
-// app.get('*', handleError);
-
-//ROUTE Handlers
-
-// function renderHome(req, res) {
-//   console.log('render home');
-//   const sql = 'SELECT * FROM booktable;';
-//   return client.query(sql)
-//     .then(results => {
-//       console.log(results.rows);
-//       res.status(200).render('pages/index');
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       res.render('pages/error');
-//     });
-// }
-
-function places(request, response) {
-  const search = request.query.search;
-  const lat = request.query.lat;
-  const lon = request.query.lon;
-  const url = `https://places.ls.hereapi.com/places/v1/autosuggest?at=${lat},${lon}&q=${search}&apiKey=${process.env.PLACES_API_KEY}`;
-  superagent.get(url).then(data => {
-    const places = data.results;
-    const newPlaces = places.forEach(obj => {
-      const place = new Place(obj);
-    });
-    response.render('pages/show', { 'places': newPlaces});
-  });
-}
-
-function favorites (request, response) {
-  const sql = 'SELECT * FROM table;';
-  client.query(sql).then(data => {
-    const rows = data.rows;
-    response.render('pages/favorites', { 'rows': rows});
-  });
-}
-
-function aboutUs (request, response) {
-  response.render('pages/about-us');
-}
-
-function zomato(request, response) {
-  console.log(request.query);
-  const query = request.query.search;
-  const url = `https://developers.zomato.com/api/v2.1/search?q=restaurant&lat=47.6062&lon=122.3321`;
-  superagent.get(url).then(data => {
-    const restaurants = data.resataurants;
-    const newRest = restaurants.map(obj => new restaurants(obj));
-    response.render('pages/show')
-  })
-}
-
-// function handleError(req, res) {
-//   res.status(404).render('pages/error');
-// }
-
-// Constructor
-
-
-function Place (obj) {
-  this.title = obj.title,
-  this.vicinity = obj.vicinity,
-  this.category = obj.categoryTitle
-}
-

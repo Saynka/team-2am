@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Book Collection</title>
-    <!-- <%- include('../layout/head.ejs') %> -->
-  </head>
-  <body>
-    <main>
-      <h2>Total books in Database: <%= renderedCOntent.length %></h2>
-    <ul>
-      <% renderedContent.forEach(book => { %>
-      <li>img src="<%= book.image_url %>" alt="<%= book.title %>">
-      <p id="title"> <%= book.title %> </p>
-      <p id="title"> <%= book.author %> </p>
-      <p><%= book.description %></p>
-      <button><a href="/books/<%= book.id %>">View Details</a></button></li>
-      <% }) %>
 
-    </ul>
+<head>
+  <title>Book Collection</title>
+</head>
 
-    </main>
-    <footer>
-      <!-- <%- include('../layout/footer.ejs') %> -->
-    </footer>
-  </body>
+<body>
+  <main>
+
+    <h2>Weather Details</h2>
+
+    <section>
+      <h2> <%= info.name %> </h2>
+      <p> <%= info.temp %> DEGREES</p>
+      <p> <%= info.description %> </p>
+      <p> <%= info.sunrise %> AM</p>
+      <p> <%= info.sunset %> PM </p>
+      <p> <%= info.windspeed %> MPH</p>
+
+      <form action="/add" method="POST">
+        <input type="hidden" name="name" value="<%= info.name %>">
+        <input type="hidden" name="temp" value="<%= info.temp %>">
+        <input type="hidden" name="description" value="<%= info.description %>">
+        <input type="hidden" name="sunrise" value="<%= info.sunrise %>">
+        <input type="hidden" name="sunset" value="<%= info.sunset %>">
+        <input type="hidden" name="windspeed" value="<%= info.windspeed %>">
+        <button type="submit">Add to Favorites</button>
+      </form>
+
+      <form action="/places" method="POST">
+        <input type="hidden" name="name" value="<%= info.name %>">
+        <input type="hidden" name="lat" value="<%= info.lat %>">
+        <input type="hidden" name="lon" value="<%= info.lon %>">
+        <button>Places to Visit</button>
+      </form>
+
+      <form action="/zomato" method="POST">
+        <input type="hidden" name="lat" value="<%= info.lat %>">
+        <input type="hidden" name="lon" value="<%= info.lon %>">
+        <button>Restaurants to Try</button>
+      </form>
+
+    </section>
+
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
 </html>
