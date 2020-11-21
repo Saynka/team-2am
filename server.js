@@ -51,14 +51,11 @@ app.get('*', errorHandler);
 function weatherHandler(request, response) {
   const search = request.query.search;
   const key = process.env.WEATHER_KEY;
-  // console.log(search);
   const url = `api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}&units=imperial`;
   superagent.get(url)
     .then(data => {
-      // console.log(data.body);
       let inst = new Weather(data);
       response.status(200).render('pages/index', { info: inst });
-      // console.log(inst);
     });
 }
 
@@ -80,6 +77,7 @@ function placesHandler(request, response) {
   superagent.get(url).then(data => {
     const places = data.body.results;
     let newPlaces = places.map(obj => new Place(obj));
+    console.log(1, places, 2, newPlaces);
     response.status(200).render('pages/places', { place: newPlaces, search: search });
   }).catch(error => {
     console.log(error);
@@ -90,9 +88,11 @@ function zomatoHandler(request, response) {
   const lat = request.body.lat;
   const lon = request.body.lon;
   const parameter = { 'lat': lat, 'lon': lon, 'count': 5 };
+  console.log('zomato', request.body);
   zomatoKey.getCollections(parameter).then(data => {
     const restaurants = data.collections;
     let newRest = restaurants.map(obj => new Zomato(obj));
+    console.log(2, newRest);
     response.render('pages/zomato', { zomato: newRest, search: request.body.name });
   }).catch(error => {
     console.log(error);
@@ -145,7 +145,9 @@ function Place(obj) {
 }
 
 function Zomato(obj) {
-  this.word = obj;
+  this.name = obj.collection.title;
+  this.description = obj.collection.description;
+  this.url = obj.collection.url;
 }
 
 client.connect()
