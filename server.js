@@ -55,13 +55,14 @@ function weatherHandler(request, response) {
   superagent.get(url)
     .then(data => {
       let inst = new Weather(data);
+      console.log(inst);
       response.status(200).render('pages/index', { info: inst });
     });
 }
 
 function addWeather(request, response) {
-  const sql = 'INSERT INTO places (name, description, temp, sunrise, sunset, windspeed) VALUES ($1, $2, $3, $4, $5, $6);';
-  const params = [request.body.name, request.body.description, request.body.temp, request.body.sunrise, request.body.sunset, request.body.windspeed];
+  const sql = 'INSERT INTO places (name, description, temp, sunrise, sunset, windspeed, lat, lon) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);';
+  const params = [request.body.name, request.body.description, request.body.temp, request.body.sunrise, request.body.sunset, request.body.windspeed, request.body.lat, request.body.lon];
   client.query(sql, params)
     .then(results => {
       response.status(200).redirect('/favorites');
@@ -77,7 +78,7 @@ function placesHandler(request, response) {
   superagent.get(url).then(data => {
     const places = data.body.results;
     let newPlaces = places.map(obj => new Place(obj));
-    console.log(1, places, 2, newPlaces);
+    // console.log(1, places, 2, newPlaces);
     response.status(200).render('pages/places', { place: newPlaces, search: search });
   }).catch(error => {
     console.log(error);
@@ -87,13 +88,12 @@ function placesHandler(request, response) {
 function zomatoHandler(request, response) {
   const lat = request.body.lat;
   const lon = request.body.lon;
+  const search = request.body.name;
   const parameter = { 'lat': lat, 'lon': lon, 'count': 5 };
-  console.log('zomato', request.body);
   zomatoKey.getCollections(parameter).then(data => {
     const restaurants = data.collections;
-    let newRest = restaurants.map(obj => new Zomato(obj));
-    console.log(2, newRest);
-    response.render('pages/zomato', { zomato: newRest, search: request.body.name });
+    let newRest = restaurants.map(obj => new Zomato(obj));  
+    response.render('pages/zomato', { zomato: newRest, search: search });
   }).catch(error => {
     console.log(error);
   });

@@ -6,17 +6,20 @@
 </head>
 
 <body>
+  <header>
+    <%- include('layout/header') %>
+  </header>
   <main>
 
     <h2>Weather Details</h2>
 
     <section>
       <h2> <%= info.name %> </h2>
-      <p> <%= info.temp %> DEGREES</p>
-      <p> <%= info.description %> </p>
-      <p> <%= info.sunrise %> AM</p>
-      <p> <%= info.sunset %> PM </p>
-      <p> <%= info.windspeed %> MPH</p>
+      <p>Temperature: <%= info.temp %> DEGREES</p>
+      <p>Description <%= info.description %> </p>
+      <p>Sunrise <%= info.sunrise %> AM</p>
+      <p>Sunset <%= info.sunset %> PM </p>
+      <p>Wind Speed <%= info.windspeed %> MPH</p>
 
       <form action="/add" method="POST">
         <input type="hidden" name="name" value="<%= info.name %>">
@@ -25,6 +28,8 @@
         <input type="hidden" name="sunrise" value="<%= info.sunrise %>">
         <input type="hidden" name="sunset" value="<%= info.sunset %>">
         <input type="hidden" name="windspeed" value="<%= info.windspeed %>">
+        <input type="hidden" name="lat" value="<%= info.lat %>">
+        <input type="hidden" name="lon" value="<%= info.lon %>">
         <button type="submit">Add to Favorites</button>
       </form>
 

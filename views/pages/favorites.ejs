@@ -6,9 +6,13 @@
   <title>Document</title>
 </head>
 <body>
+  <header>
+    <%- include('layout/header') %>
+  </header>
   <h2>Weather Details</h2>
 
 <% row.forEach( place => { %>
+  <% console.log(place)%>
   <section>
     <h2> <%= place.name %> </h2>
     <p> <%= place.temp %> DEGREES</p>
@@ -19,6 +23,19 @@
 
     <form action="/delete/<%=place.id%>?_method=DELETE" method="post" id="deleteForm">
       <button type="submit">Delete</button>
+    </form>
+
+    <form action="/places" method="POST">
+      <input type="hidden" name="name" value="<%= place.name %>">
+      <input type="hidden" name="lat" value="<%= place.lat %>">
+      <input type="hidden" name="lon" value="<%= place.lon %>">
+      <button>Places to Visit</button>
+    </form>
+
+    <form action="/zomato" method="POST">
+      <input type="hidden" name="lat" value="<%= place.lat %>">
+      <input type="hidden" name="lon" value="<%= place.lon %>">
+      <button>Restaurants to Try</button>
     </form>
 
   </section>
