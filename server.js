@@ -2,7 +2,6 @@
 
 //Bring in dependencies
 const express = require('express');
-
 const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
@@ -22,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // Declare port for server
+const PORT = process.env.PORT || 3000;
 
 
 // Creating postgres client
 const client = new pg.Client(process.env.DATABASE_URL);
-const PORT = process.env.PORT || 3000;
 
 // app.get('/', (req,res) => {
 //   res.status(200).send('Shits GOOD');
@@ -109,6 +108,17 @@ function favorites (request, response) {
 
 function aboutUs (request, response) {
   response.render('pages/about-us');
+}
+
+function zomato(request, response) {
+  console.log(request.query);
+  const query = request.query.search;
+  const url = `https://developers.zomato.com/api/v2.1/search?q=restaurant&lat=47.6062&lon=122.3321`;
+  superagent.get(url).then(data => {
+    const restaurants = data.resataurants;
+    const newRest = restaurants.map(obj => new restaurants(obj));
+    response.render('pages/show')
+  })
 }
 
 // function handleError(req, res) {
