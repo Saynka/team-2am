@@ -39,15 +39,11 @@ body{
   height: 100%;
   z-index: -1;
   opacity: 0.7;
-  }
-  
-  /* body {
-  } */
-  
+}
   
   /* # p=ids to be determined */
   
- 
+
   #Sam {
     display: flex;
     flex-direction: row;
@@ -76,7 +72,7 @@ body{
     display: flex;
     flex-direction: row;
     margin-top: 9em;
-    margin-right: 26em;
+    margin-right: 6em;
     height: 25em;
   }
   
@@ -131,7 +127,7 @@ body{
     display: flex;
     flex-direction: row;
     margin-top: 9em;
-    margin-left: 26em;
+    margin-left: 4em;
     height: 25em;
   }
   
@@ -145,6 +141,7 @@ body{
   #mattss {
     font-size: 1.9em;
     font-family: 'Shadows Into Light Two', cursive;
+    color: rgb(114, 171, 175);
   }
   
   #mattp {

@@ -1,3 +1,23 @@
+body{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 22px;
+}
+
+#site{
+  height: 250px;
+  width: fill;
+  margin: auto;
+}
+
+p{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 36px;
+  color: rgb(93, 139, 145);
+  width: auto;
+}
+
 header {
   padding-top: 30px;
   width: 90%;
@@ -5,7 +25,6 @@ header {
   margin: auto;
   color: white;
 }
-
 
 #topbuttons{
   margin-top: 5px;
@@ -60,6 +79,7 @@ header {
 
 #b-n{
   border-radius: 8px;
+  color: rgb(255, 255, 255);
 }
 
 #c-n{
