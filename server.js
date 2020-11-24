@@ -149,6 +149,7 @@ function Zomato(obj) {
   this.name = obj.restaurant.name;
   this.address = obj.restaurant.location.address;
   this.url = obj.restaurant.url;
+  this.image = obj.restaurant.featured_image;
 }
 
 client.connect()
