@@ -4,7 +4,7 @@
   <%- include('layout/head') %>
   <title>Document</title>
 </head>
-<body>
+<body id="favorites">
   <header>
     <%- include('layout/header') %>
   </header>
@@ -15,10 +15,10 @@
   <section>
     <h2> <%= place.name %> </h2>
     <p> <%= place.temp %> DEGREES</p>
-    <p> <%= place.description %> </p>
-    <p> <%= place.sunrise %> AM</p>
-    <p> <%= place.sunset %> PM </p>
-    <p> <%= place.windspeed %> MPH</p>
+    <p>Descritpion <%= place.description %> </p>
+    <p>Sunrise <%= place.sunrise %> AM</p>
+    <p>Sunset <%= place.sunset %> PM </p>
+    <p>Wind speed <%= place.windspeed %> MPH</p>
 
     <form action="/delete/<%=place.id%>?_method=DELETE" method="post" id="deleteForm">
       <button type="submit">Delete</button>

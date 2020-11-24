@@ -1,13 +1,39 @@
-body{
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 22px;
+
+body {
+  width: 100%;
 }
 
 #site{
   height: 250px;
   width: fill;
   margin: auto;
+}
+
+#favorites section p {
+  color: white;
+  font-size: small;
+}
+
+ h2 {
+   text-align: center;
+  color: #551A8B;
+}
+
+button {
+  color: #551A8B;
+  margin-top: 5px;
+}
+
+#favorites {
+  margin: auto;
+}
+
+#favorites section {
+  margin-top: 50px;
+  width: 19%;
+  display: inline-block;
+  border: 2px solid white;
+  margin-left: 10px;
 }
 
 p{
@@ -85,4 +111,10 @@ header {
 #c-n{
   background-color: #555555;
   border-radius: 8px;
+}
+
+#backimg {
+  width: 100%;
+  margin-top: 50px;
+  
 }
