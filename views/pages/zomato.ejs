@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('layout/head') %>
   <title>Document</title>
 </head>
 <body>
@@ -10,21 +9,12 @@
     <%- include('layout/header') %>
   </header>
   <main>
+    <img id="backimgm" src="..\styles\img\image.png"></img>
     <% zomato.forEach(thing => { %>
       <section>
         <h2> <%= thing.name %> </h2>
         <p> <%= thing.description %> </p>
         <p> <%= thing.url %> </p>
-  
-  
-        <form action="/add" method="POST">
-          <input type="hidden" name="name" value="<%= thing.title %>">
-          <input type="hidden" name="temp" value="<%= thing.vacinity %>">
-          <input type="hidden" name="description" value="<%= thing.catagory  %>">
-  
-          <button type="submit">Add to Favorites</button>
-        </form>
-
   
       </section>
       <% }) %>
