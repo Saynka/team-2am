@@ -5,11 +5,11 @@
   <title>Document</title>
 </head>
 <body>
+  <img id="backimgm" src="..\styles\img\image.png"></img>
   <header>
     <%- include('layout/header') %>
   </header>
   <main>
-    <img id="backimgm" src="..\styles\img\image.png"></img>
     <% zomato.forEach(thing => { %>
       <section>
         <h2> <%= thing.name %> </h2>
