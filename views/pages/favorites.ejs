@@ -9,12 +9,12 @@
   <header>
     <%- include('layout/header') %>
   </header>
-  <h2>Weather Details</h2>
+  <h2 class="glow">City Details</h2>
 
 <% row.forEach( place => { %>
   <% console.log(place)%>
-  <section>
-    <h2> <%= place.name %> </h2>
+  <section id="fav">
+    <h2 id="texti"> <%= place.name %> </h2>
     <p> <%= place.temp %> DEGREES</p>
     <p>Descritpion <%= place.description %> </p>
     <p>Sunrise <%= place.sunrise %> AM</p>
