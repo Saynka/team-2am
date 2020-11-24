@@ -29,7 +29,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 // Preparing zomato api key
 const zomatoKey = zomato({
-  userKey: '30d4a494d4c1cfa083e70daa7b4eb103'
+  userKey: process.env.ZOMATO
 });
 
 // Routes
@@ -89,10 +89,11 @@ function zomatoHandler(request, response) {
   const lat = request.body.lat;
   const lon = request.body.lon;
   const search = request.body.name;
-  const parameter = { 'lat': lat, 'lon': lon, 'count': 5 };
-  zomatoKey.getCollections(parameter).then(data => {
-    const restaurants = data.collections;
+  const parameter = { 'lat': lat, 'lon': lon, 'count': 5, 'entity-type': 'restaurant', 'q': search };
+  zomatoKey.search(parameter).then(data => {
+    const restaurants = data.restaurants;
     let newRest = restaurants.map(obj => new Zomato(obj));  
+    console.log(newRest);
     response.render('pages/zomato', { zomato: newRest, search: search });
   }).catch(error => {
     console.log(error);
@@ -145,9 +146,9 @@ function Place(obj) {
 }
 
 function Zomato(obj) {
-  this.name = obj.collection.title;
-  this.description = obj.collection.description;
-  this.url = obj.collection.url;
+  this.name = obj.restaurant.name;
+  this.address = obj.restaurant.location.address;
+  this.url = obj.restaurant.url;
 }
 
 client.connect()
