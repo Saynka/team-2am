@@ -1,6 +1,7 @@
 
 body {
-  width: 100%;
+ margin: auto;
+  background-color: black;
 }
 
 #site{
@@ -65,16 +66,23 @@ header {
 
 #h{
   float: left;
+
+}
+
+a {
+  color: yellow;
 }
 
 #n{
   margin-left: 16px;
   float: left;
+  color: yellow;
 }
 
 #f{
   margin-left: 16px;
   float: left;
+  color: yellow;
 }
 
 #au{
@@ -113,7 +121,7 @@ header {
   border-radius: 8px;
 }
 
-#backimg {
+#backimgm {
   position: fixed;
   width: 100%;
   height: 100%;
