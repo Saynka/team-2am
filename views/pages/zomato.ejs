@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('layout/head') %>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <%- include('layout/header') %>
+  </header>
+  <main>
+    <% zomato.forEach(thing => { %>
+      <section>
+        <h2> <%= thing.name %> </h2>
+        <p> <%= thing.description %> </p>
+        <p> <%= thing.url %> </p>
+  
+      </section>
+      <% }) %>
+  </main>
+</body>
+</html>

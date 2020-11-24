@@ -1,0 +1,88 @@
+body{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 22px;
+}
+
+#site{
+  height: 250px;
+  width: fill;
+  margin: auto;
+}
+
+p{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 36px;
+  color: rgb(93, 139, 145);
+  width: auto;
+}
+
+header {
+  padding-top: 30px;
+  width: 90%;
+  height: 60px;
+  margin: auto;
+  color: white;
+}
+
+#topbuttons{
+  margin-top: 5px;
+  margin-bottom: 22px;
+  /* display: flex; */
+  justify-content: center;
+  /* align-items: center; */
+  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+  font-stretch: expanded;
+  
+}
+
+#h{
+  float: left;
+}
+
+#n{
+  margin-left: 16px;
+  float: left;
+}
+
+#f{
+  margin-left: 16px;
+  float: left;
+}
+
+#au{
+  float: right;
+}
+
+.topbox {
+  text-align: center;
+  font-stretch: expanded;
+  color: bisque;
+  padding: 5px;
+  margin: auto;
+  width: 90%;
+  margin-top: 12px;
+  width: fill;
+  background-color: rgb(15, 52, 73);
+  border: 3px groove rgb(11, 24, 34);
+  border-radius: 4px;
+
+}
+.a-n {
+  background: rgb(99, 93, 93);
+  border: 3px groove rgb(57, 77, 92);
+  padding: 15px;
+  display: grid;
+  height: 100%;
+}
+
+#b-n{
+  border-radius: 8px;
+  color: rgb(255, 255, 255);
+}
+
+#c-n{
+  background-color: #555555;
+  border-radius: 8px;
+}

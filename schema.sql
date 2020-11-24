@@ -6,5 +6,7 @@ CREATE TABLE places (
   temp VARCHAR(255),
   sunrise VARCHAR(255),
   sunset VARCHAR(255),
-  windspeed VARCHAR(255)
+  windspeed VARCHAR(255),
+  lat VARCHAR(255),
+  lon VARCHAR(255)
 );

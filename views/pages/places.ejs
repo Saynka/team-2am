@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('layout/head') %>
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <%- include('layout/header') %>
+  </header>
+  <main>
+    <% place.forEach(thing => { %>
+      <section>
+        <h2> <%= thing.title %> </h2>
+        <p> <%= thing.vicinity %> </p>
+        <p> <%= thing.category %> </p>
+  
+      </section>
+    <% }) %>
+    <form action="/weather">
+      <button name="search" value="<%= search %>">Home</button>
+    </form>
+  </main>
+</body>
+</html>
