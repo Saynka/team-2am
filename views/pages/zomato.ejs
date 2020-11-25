@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <%- include('layout/head') %>
-  <title>Document</title>
+  <title>Saturday Night Lights - Local Food</title>
 </head>
+
 <body>
+  <img id="backimgm" src="..\styles\img\image.png"></img>
   <header>
     <%- include('layout/header') %>
   </header>
   <main>
-    <img id="backimgm" src="..\styles\img\image.png"></img>
     <% zomato.forEach(thing => { %>
-      <section>
-        <h2> <%= thing.name %> </h2>
-        <p> <%= thing.description %> </p>
-        <p> <%= thing.url %> </p>
-  
-      </section>
-      <% }) %>
+    <section>
+      <h2 class="glow">
+        <a href="<%= thing.url %>"><%= thing.name %>
+        </a>
+      </h2>
+      <p> <%= thing.description %> </p>
+
+      
+      
+    </section>
+    <% }) %>
+    <form class="back" action="/weather">
+      <button name="search" value="<%= search %>">Back</button>
+    </form>
   </main>
 </body>
+
 </html>

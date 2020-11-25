@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>Book Collection</title>
   <%- include('layout/head') %>
+  <title>Saturday Night Lights - City Details</title>
 </head>
 
 <body>
@@ -13,12 +13,12 @@
   </header>
   <main>
 
-    
 
-    <h2>Weather Details</h2>
 
-    <section>
-      <h2> <%= info.name %> </h2>
+    <h2 class="glow2">City Details</h2>
+
+    <section id="homes">
+      <h2 id="texti"> <%= info.name %> </h2>
       <p>Temperature: <%= info.temp %> DEGREES</p>
       <p>Description <%= info.description %> </p>
       <p>Sunrise <%= info.sunrise %> AM</p>
@@ -45,13 +45,14 @@
       </form>
 
       <form action="/zomato" method="POST">
+        <input type="hidden" name="name" value="<%= info.name %>">
         <input type="hidden" name="lat" value="<%= info.lat %>">
         <input type="hidden" name="lon" value="<%= info.lon %>">
         <button>Restaurants to Try</button>
       </form>
 
     </section>
-    
+
 
   </main>
   <footer>
