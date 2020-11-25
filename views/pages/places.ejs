@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <%- include('layout/head') %>
-  <title>Document</title>
+  <title>Saturday Night Lights - Place To visit</title>
 </head>
 <body>
   <header>
@@ -13,13 +13,13 @@
   <main>
     <% place.forEach(thing => { %>
       <section>
-        <h2> <%= thing.title %> </h2>
+        <h2 class="glow"> <%= thing.title %> </h2>
         <p> <%= thing.vicinity %> </p>
         <p> <%= thing.category %> </p>
   
       </section>
     <% }) %>
-    <form action="/weather">
+    <form class="back" action="/weather">
       <button name="search" value="<%= search %>">Home</button>
     </form>
   </main>
