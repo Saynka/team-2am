@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('layout/head') %>
+  <title>Saturday Night Lights</title>
+</head>
+
+<body>
+  <img id="backimgm" src="../styles/img/citybg.jpeg"></img>
+  <header>
+    <%- include('layout/header') %>
+  </header>
+  <div id="flexs">
+    <div id="site">
+    <p class="glow" id="newp">SATURDAY NIGHT LIGHTS</p>
+    </div>
+
+    <div class="topbox">
+      <section class="a-n">
+        <form action='/weather' method="GET">
+          <fieldset>
+            <legend>Search by City</legend>
+            <label>Enter a City:<input id="b-n" type='text' name='search'></label>
+            <button id="c-n">Submit</button>
+
+          </fieldset>
+        </form>
+      </section>
+    </div>
+  </div>
+  <footer>
+    <%- include('../pages/layout/footer.ejs') %>
+  </footer>
+
+</body>
+
+</html>
+

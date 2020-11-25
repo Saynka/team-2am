@@ -1,0 +1,390 @@
+@import url(https://fonts.googleapis.com/css?family=Orbitron);
+
+/* General layout */
+
+body{
+  background-color: rgb(20, 20, 20);
+  margin: auto;
+  font-family: 'Orbitron', courier, sans-serif;
+}
+
+main{
+  text-align: center;
+}
+
+#backimgm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+header {
+  padding-top: 30px;
+  width: 90%;
+  height: 60px;
+  margin: auto;
+  color: white;
+}
+
+
+#topbuttons{
+  margin-top: 5px;
+  margin-bottom: 22px;
+  justify-content: center;
+  font-family: sans-serif, "Helvetica Neue", "Lucida Grande", Arial;
+  font-stretch: expanded;
+  
+}
+
+#h{
+  float: left;
+  
+}
+
+#n{
+  margin-left: 16px;
+  float: left;
+  color: yellow;
+}
+
+#f{
+  margin-left: 16px;
+  float: left;
+  color: yellow;
+}
+
+#au{
+  float: right;
+}
+
+#favorites section p {
+  color: rgb(0, 255, 170);
+  font-size: medium;
+}
+
+h2, h2 a {
+  text-align: center;
+}
+
+button {
+  color: #551A8B;
+  margin-top: 5px;
+  background-color: darkkhaki;
+  border-radius: 8px;
+  
+}
+
+p {
+  margin-top:3em;
+  font-size:2em;
+  font-size: xx-large;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 36px;
+  color: rgb(167, 221, 117);
+  width: auto;
+}
+
+/* New ejs */
+
+/* #flexs {
+  flex-wrap: wrap;
+} */
+
+#site{
+  /* height: 250px; */
+  width: fill;
+  margin: auto;
+}
+
+#newp{
+  font-size: 400%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 36px;
+  width: auto;
+}
+
+
+.topbox {
+  text-align: center;
+  font-stretch: expanded;
+  color: rgb(230, 147, 46);
+  padding: 5px;
+  margin: auto;
+  width: 90%;
+  margin-top: 4em;
+  width: fill;
+  background-color: rgb(15, 52, 73);
+  border: 3px groove rgb(11, 24, 34);
+  border-radius: 4px;
+
+}
+.a-n {
+  background: rgb(99, 93, 93);
+  border: 3px groove rgb(57, 77, 92);
+  padding: 15px;
+  display: grid;
+  height: 100%;
+}
+
+#b-n{
+  background: rgb(59, 56, 35);
+  border-radius: 8px;
+  color:  rgb(0, 131, 253);
+}
+
+#c-n{
+  background-color: #555555;
+  border-radius: 8px;
+}
+
+/* Index EJs */
+
+#homes{
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+  margin-top: 10em;
+}
+
+#texti{
+  margin-top: 4em;
+  font-size: xx-large;
+  color: #FFD300;
+  -webkit-text-stroke: 2px rgb(0, 131, 253);
+}
+
+
+/* Favorites EJS */
+
+#favorites {
+  margin: auto;
+}
+
+#favorites section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 400px;
+  display: inline-block;
+  border: 2px solid white;
+  margin-left: 10px;
+  border-radius: 8px;
+}
+
+
+#fav{
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+/* new stuff */
+
+/* // neon light blue */
+
+
+h2 {font-size:5em;}
+a {
+  text-decoration:none;
+  color:rgba(255,255,255,.3); // Fallback for Clipping the anchor text on nonWebkit browsers
+}
+
+.glow {
+  -webkit-text-stroke: 2px rgb(0, 131, 253);
+  text-align:center;
+  color:rgba(255,255,255,.3); 
+  text-shadow: 0 0 1px rgba(157,208,154,.3); // Fallback for nonCSS3?
+  /* Stripes */
+  /*Fallback:
+http://nimbupani.com/using-background-clip-for-text-with-css-fallback.html
+*/
+  background: -webkit-linear-gradient(transparent, transparent),               url(https://i.imgur.com/WyMyxQ6.png) repeat;
+  /* clipping webkit magic */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Animation */
+  -webkit-animation: glow 3s infinite alternate;
+     -moz-animation: glow 3s infinite alternate;
+          animation: glow 3s infinite alternate;
+  -webkit-animation-timing-function: cubic-bezier(1,.3,.79,.81);
+     -moz-animation-timing-function: cubic-bezier(1,.3,.79,.81);
+          animation-timing-function: cubic-bezier(1,.3,.79,.81);
+}
+
+@-webkit-keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}
+
+@-moz-keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}
+
+/* Glow reg headers*/
+
+h2 {font-size:5em;}
+a {
+  text-decoration:none;
+  color:rgba(255,255,255,.3); // Fallback for Clipping the anchor text on nonWebkit browsers
+}
+
+.glow2 {
+  -webkit-text-stroke: 2px rgb(0, 131, 253);
+  text-align:center;
+  color:rgba(255,255,255,.3); 
+  text-shadow: 0 0 1px rgba(157,208,154,.3); // Fallback for nonCSS3?
+  /* Stripes */
+  /*Fallback:
+http://nimbupani.com/using-background-clip-for-text-with-css-fallback.html
+*/
+  background: -webkit-linear-gradient(transparent, transparent),               url(https://i.imgur.com/WyMyxQ6.png) repeat;
+  /* clipping webkit magic */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Animation */
+  -webkit-animation: glow 3s infinite alternate;
+     -moz-animation: glow 3s infinite alternate;
+          animation: glow 3s infinite alternate;
+  -webkit-animation-timing-function: cubic-bezier(1,.3,.79,.81);
+     -moz-animation-timing-function: cubic-bezier(1,.3,.79,.81);
+          animation-timing-function: cubic-bezier(1,.3,.79,.81);
+}
+
+@-webkit-keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}
+
+@-moz-keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 1px rgba(255,255,255,.1),
+                 0 0 3px rgba(255,255,255,.1),
+                 0 0 5px rgba(157,208,154,.3);
+  }
+  50% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  52% {
+    text-shadow: 0 0 5px rgba(157,208,154,.3);
+  }
+  54% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(255,255,255,.1),
+                 0 0 5px rgba(255,255,255,.1),
+                 0 0 10px rgba(157,208,154,.3);
+  }
+}

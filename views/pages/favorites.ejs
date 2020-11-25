@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('layout/head') %>
+  <title>Saturday Night Lights - Favorites</title>
+</head>
+
+<body id="favorites">
+  <img id="backimgm" src="..\styles\img\singapore sky line.jpg"></img>
+  <header>
+    <%- include('layout/header') %>
+  </header>
+  <main>
+    <h2 class="glow">City Details</h2>
+
+    <% row.forEach( place => { %>
+    <% console.log(place)%>
+    <section id="fav">
+      <h2 id="texti"> <%= place.name %> </h2>
+      <p> <%= place.temp %> DEGREES</p>
+      <p>Descritpion <%= place.description %> </p>
+      <p>Sunrise <%= place.sunrise %> AM</p>
+      <p>Sunset <%= place.sunset %> PM </p>
+      <p>Wind speed <%= place.windspeed %> MPH</p>
+
+      <form action="/delete/<%=place.id%>?_method=DELETE" method="post" id="deleteForm">
+        <button type="submit">Delete</button>
+      </form>
+
+      <form action="/places" method="POST">
+        <input type="hidden" name="name" value="<%= place.name %>">
+        <input type="hidden" name="lat" value="<%= place.lat %>">
+        <input type="hidden" name="lon" value="<%= place.lon %>">
+        <button>Places to Visit</button>
+      </form>
+
+      <form action="/zomato" method="POST">
+        <input type="hidden" name="lat" value="<%= place.lat %>">
+        <input type="hidden" name="lon" value="<%= place.lon %>">
+        <button>Restaurants to Try</button>
+      </form>
+
+    </section>
+    <% }) %>
+  </main>
+</body>
+
+</html>
