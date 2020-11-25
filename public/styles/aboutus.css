@@ -1,8 +1,10 @@
+
 body{
   background-color: rgb(20, 20, 20);
   margin: auto;
 }
 
+/* Header buttons */
 
 #topbuttons{
   margin-top: 5px;
@@ -41,7 +43,7 @@ body{
   opacity: 0.7;
 }
   
-  /* # p=ids to be determined */
+
   
 
   #Sam {
@@ -127,7 +129,7 @@ body{
     display: flex;
     flex-direction: row;
     margin-top: 9em;
-    margin-left: 4em;
+    margin-left: 9em;
     height: 25em;
   }
   
