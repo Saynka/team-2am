@@ -89,9 +89,9 @@ p {
 
 /* New ejs */
 
-#flexs{
+/* #flexs {
   flex-wrap: wrap;
-}
+} */
 
 #site{
   /* height: 250px; */
@@ -100,7 +100,7 @@ p {
 }
 
 #newp{
-  font-size: xx-large;
+  font-size: 400%;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 36px;
@@ -131,8 +131,9 @@ p {
 }
 
 #b-n{
+  background: rgb(59, 56, 35);
   border-radius: 8px;
-  color: rgb(19, 16, 16);
+  color:  rgb(0, 131, 253);
 }
 
 #c-n{
