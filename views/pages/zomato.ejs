@@ -12,13 +12,15 @@
     <%- include('layout/header') %>
   </header>
   <main>
+    <h2>Local Restaurants</h2>
     <% zomato.forEach(thing => { %>
     <section>
+      <img class="zomatoImg" src="<%= thing.image %>" alt="">
       <h2 class="glow">
         <a href="<%= thing.url %>"><%= thing.name %>
         </a>
       </h2>
-      <p> <%= thing.description %> </p>
+      <p> <%= thing.address %> </p>
 
       
       
